@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ToDo List</title>
+
+    <!-- css do projeto -->
+    <link rel="stylesheet" href="src/css/styles.css" />
+  </head>
+  <body>
+    <div id="todo-container">
+      <header>
+        <h1>ToDo List</h1>
+      </header>
+      <form id="todo-form">
+        <h3>Adicione a sua tarefa:</h3>
+        <div class="form-control">
+          <input
+            type="text"
+            name="todo-input"
+            id="todo-input"
+            placeholder="O que você vai fazer?"
+          />
+          <button type="submit">
+            <i class="bi bi-plus"></i>
+          </button>
+        </div>
+      </form>
+      <form id="edit-form">
+        <h3>Edite uma tarefa:</h3>
+        <div class="form-control">
+          <input
+            type="text"
+            name="edit-input"
+            id="edit-input"
+            placeholder="O que você vai fazer?"
+          />
+          <button type="submit">
+            <i class="bi bi-check-all"></i>
+          </button>
+        </div>
+        <button id="cancel-edit-btn">Cancelar</button>
+      </form>
+      <div id="barra-ferramentas">
+        <div id="buscar-container">
+          <h3>Pesquisar:</h3>
+          <form>
+            <input type="text" name="buscar-input" id="buscar-input" />
+            <button id="apagar-btn">
+              <i class="bi bi-eraser"></i>
+            </button>
+          </form>
+        </div>
+        <div id="filtrar-container"></div>
+      </div>
+      <div id="todo-list">
+        <div class="todo feita">
+          <h2>Estou fazendo alguma coisa...</h2>
+          <button class="finalizar-todo">
+            <i class="bi bi-check"></i>
+          </button>
+          <button class="editar-todo">
+            <i class="bi bi-pen"></i>
+          </button>
+          <button class="deletar-todo">
+            <i class="bi bi-x-lg"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
