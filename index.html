@@ -14,7 +14,7 @@
         <h1>ToDo List</h1>
       </header>
       <form id="todo-form">
-        <h3>Adicione a sua tarefa:</h3>
+        <p>Adicione a sua tarefa:</p>
         <div class="form-control">
           <input
             type="text"
@@ -28,22 +28,17 @@
         </div>
       </form>
       <form id="edit-form">
-        <h3>Edite uma tarefa:</h3>
+        <p>Edite uma tarefa:</p>
         <div class="form-control">
-          <input
-            type="text"
-            name="edit-input"
-            id="edit-input"
-            placeholder="O que você vai fazer?"
-          />
+          <input type="text" name="edit-input" id="edit-input" />
           <button type="submit">
             <i class="bi bi-check-all"></i>
           </button>
         </div>
         <button id="cancel-edit-btn">Cancelar</button>
       </form>
-      <div id="barra-ferramentas">
-        <div id="buscar-container">
+      <div id="barra-pesquisa">
+        <div id="busca-container">
           <h3>Pesquisar:</h3>
           <form>
             <input type="text" name="buscar-input" id="buscar-input" />
@@ -52,10 +47,29 @@
             </button>
           </form>
         </div>
-        <div id="filtrar-container"></div>
+        <div id="filtro-container">
+          <h3>Filtrar:</h3>
+          <select name="filtro-select" id="filtro-select">
+            <option value="todas">Todas</option>
+            <option value="feitas">Feitas</option>
+            <option value="realizar">A fazer</option>
+          </select>
+        </div>
       </div>
       <div id="todo-list">
         <div class="todo feita">
+          <h2>Estou fazendo alguma coisa...</h2>
+          <button class="finalizar-todo">
+            <i class="bi bi-check"></i>
+          </button>
+          <button class="editar-todo">
+            <i class="bi bi-pen"></i>
+          </button>
+          <button class="deletar-todo">
+            <i class="bi bi-x-lg"></i>
+          </button>
+        </div>
+        <div class="todo">
           <h2>Estou fazendo alguma coisa...</h2>
           <button class="finalizar-todo">
             <i class="bi bi-check"></i>
