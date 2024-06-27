@@ -1,8 +1,13 @@
-// selecionando dados
+// selecionando elementos
 
 const todoForm = document.querySelector("#todo-form");
 const todoInput = document.querySelector("#todo-input");
+const editForm = document.querySelector("#edit-form");
+const editInput = document.querySelector("#edit-input");
+const buscaContainer = document.querySelector("#busca-container");
+const filtroContainer = document.querySelector("#filtro-container");
 const todoList = document.querySelector("#todo-list");
+const cancelEditBtn = document.querySelector("#cancel-edit-btn");
 
 // funções
 
@@ -32,7 +37,7 @@ const addTodo = () => {
   salvarTodos(todos);
 
   todoInput.value = "";
-  // todoInput.focus();
+  todoInput.focus();
 };
 
 const gerarId = () => {
@@ -73,6 +78,14 @@ const criarTodo = (id, titulo, feita) => {
     toggleConcluirTodo(id);
   });
 
+  todo.querySelector(".editar-todo").addEventListener("click", () => {
+    esconderForms();
+
+    editInput.value = titulo;
+
+    atualizarTodo(id, editInput);
+  });
+
   todo.querySelector(".deletar-todo").addEventListener("click", (e) => {
     const alvoElement = e.target;
     const paiElement = alvoElement.closest("div");
@@ -83,6 +96,12 @@ const criarTodo = (id, titulo, feita) => {
   });
 
   return todo;
+};
+
+const esconderForms = () => {
+  todoForm.classList.toggle("hide");
+  editForm.classList.toggle("hide");
+  todoList.classList.toggle("hide");
 };
 
 // local storage
@@ -107,6 +126,16 @@ const toggleConcluirTodo = (id) => {
   salvarTodos(todos);
 };
 
+const atualizarTodo = (id, titulo) => {
+  const todos = pegarTodos();
+
+  const todoAlvo = todos.filter((todo) => todo.id === id)[0];
+
+  todoAlvo.titulo = titulo;
+
+  salvarTodos(todos);
+};
+
 const removerTodo = (id) => {
   const todos = pegarTodos().filter((todo) => todo.id !== id);
 
@@ -119,6 +148,22 @@ todoForm.addEventListener("submit", (e) => {
   e.preventDefault();
 
   addTodo();
+});
+
+editForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  const valorEditInput = editInput.value;
+
+  if (valorEditInput) atualizarTodo(valorEditInput);
+
+  esconderForms();
+});
+
+cancelEditBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+
+  esconderForms();
 });
 
 // inicialização
