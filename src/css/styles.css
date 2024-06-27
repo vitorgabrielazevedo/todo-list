@@ -46,6 +46,7 @@ button:hover i {
 
 button i {
   font-size: 20px;
+  pointer-events: none;
 }
 
 input,
