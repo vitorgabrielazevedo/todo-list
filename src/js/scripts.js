@@ -8,6 +8,10 @@ const buscaContainer = document.querySelector("#busca-container");
 const filtroContainer = document.querySelector("#filtro-container");
 const todoList = document.querySelector("#todo-list");
 const cancelEditBtn = document.querySelector("#cancel-edit-btn");
+const filtroSelect = document.querySelector("#filtro-select");
+
+let oldInputValue;
+let oldIdValue;
 
 // funções
 
@@ -78,12 +82,12 @@ const criarTodo = (id, titulo, feita) => {
     toggleConcluirTodo(id);
   });
 
-  todo.querySelector(".editar-todo").addEventListener("click", () => {
+  todo.querySelector(".editar-todo").addEventListener("click", (e) => {
     esconderForms();
 
     editInput.value = titulo;
-
-    atualizarTodo(id, editInput);
+    oldInputValue = titulo;
+    oldIdValue = id;
   });
 
   todo.querySelector(".deletar-todo").addEventListener("click", (e) => {
@@ -102,6 +106,41 @@ const esconderForms = () => {
   todoForm.classList.toggle("hide");
   editForm.classList.toggle("hide");
   todoList.classList.toggle("hide");
+};
+
+// ANALISAR O ATUALIZAR
+
+const atualizarTodo = (id, titulo) => {
+  const todos = pegarTodos();
+
+  todos.forEach((todo) => {
+    if (todo.id === id) {
+      todo.titulo = titulo;
+    }
+  });
+
+  salvarTodos(todos);
+};
+
+const filtrarTodos = (valorFiltro) => {
+  const todos = pegarTodos();
+
+  switch (valorFiltro) {
+    case "Todas":
+      todos.forEach((todo) => (todo.style.display = "flex"));
+      break;
+
+    case "Feitas":
+      todos.forEach((todo) =>
+        todo.feita
+          ? (todo.style.display = "flex")
+          : (todo.style.display = "none")
+      );
+      break;
+
+    default:
+      break;
+  }
 };
 
 // local storage
@@ -126,16 +165,6 @@ const toggleConcluirTodo = (id) => {
   salvarTodos(todos);
 };
 
-const atualizarTodo = (id, titulo) => {
-  const todos = pegarTodos();
-
-  const todoAlvo = todos.filter((todo) => todo.id === id)[0];
-
-  todoAlvo.titulo = titulo;
-
-  salvarTodos(todos);
-};
-
 const removerTodo = (id) => {
   const todos = pegarTodos().filter((todo) => todo.id !== id);
 
@@ -153,9 +182,11 @@ todoForm.addEventListener("submit", (e) => {
 editForm.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  const valorEditInput = editInput.value;
+  const editInputValue = editInput.value;
 
-  if (valorEditInput) atualizarTodo(valorEditInput);
+  if (editInputValue) {
+    atualizarTodo(oldIdValue, editInputValue);
+  }
 
   esconderForms();
 });
@@ -164,6 +195,12 @@ cancelEditBtn.addEventListener("click", (e) => {
   e.preventDefault();
 
   esconderForms();
+});
+
+filtroSelect.addEventListener("change", (e) => {
+  const valorFiltro = e.target.value;
+
+  filtrarTodos(valorFiltro);
 });
 
 // inicialização
