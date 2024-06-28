@@ -147,26 +147,33 @@ const buscarTodos = (busca) => {
   });
 };
 
-// const filtrarTodos = (valorFiltro) => {
-//   const todos = pegarTodos();
+const filtrarTodos = (valorFiltro) => {
+  const todos = document.querySelectorAll(".todo");
 
-//   switch (valorFiltro) {
-//     case "Todas":
-//       todos.forEach((todo) => (todo.style.display = "flex"));
-//       break;
+  switch (valorFiltro) {
+    case "todas":
+      todos.forEach((todo) => (todo.style.display = "flex"));
+      break;
 
-//     case "Feitas":
-//       todos.forEach((todo) =>
-//         todo.feita
-//           ? (todo.style.display = "flex")
-//           : (todo.style.display = "none")
-//       );
-//       break;
+    case "feitas":
+      todos.forEach((todo) =>
+        todo.classList.contains("feita")
+          ? (todo.style.display = "flex")
+          : (todo.style.display = "none")
+      );
+      break;
 
-//     default:
-//       break;
-//   }
-// };
+    case "realizar":
+      todos.forEach((todo) => {
+        !todo.classList.contains("feita")
+          ? (todo.style.display = "flex")
+          : (todo.style.display = "none");
+      });
+
+    default:
+      break;
+  }
+};
 
 // local storage
 
