@@ -4,11 +4,10 @@ const todoForm = document.querySelector("#todo-form");
 const todoInput = document.querySelector("#todo-input");
 const editForm = document.querySelector("#edit-form");
 const editInput = document.querySelector("#edit-input");
-const buscaContainer = document.querySelector("#busca-container");
-const filtroContainer = document.querySelector("#filtro-container");
 const todoList = document.querySelector("#todo-list");
 const cancelEditBtn = document.querySelector("#cancel-edit-btn");
-const buscarInput = document.querySelector("#buscar-input");
+const buscaInput = document.querySelector("#buscar-input");
+const apagarBtn = document.querySelector("#apagar-btn");
 const filtroSelect = document.querySelector("#filtro-select");
 
 let oldIdValue;
@@ -117,20 +116,6 @@ const esconderForms = () => {
   todoList.classList.toggle("hide");
 };
 
-const atualizarTodo = (id, titulo) => {
-  const todos = pegarTodos();
-
-  todos.forEach((todo) => {
-    if (todo.id === id) {
-      todo.titulo = titulo;
-    }
-  });
-
-  salvarTodos(todos);
-
-  mostrarTodos();
-};
-
 const buscarTodos = (busca) => {
   const todos = document.querySelectorAll(".todo");
 
@@ -203,6 +188,20 @@ const removerTodo = (id) => {
   salvarTodos(todos);
 };
 
+const atualizarTodo = (id, titulo) => {
+  const todos = pegarTodos();
+
+  todos.forEach((todo) => {
+    if (todo.id === id) {
+      todo.titulo = titulo;
+    }
+  });
+
+  salvarTodos(todos);
+
+  mostrarTodos();
+};
+
 // eventos
 
 todoForm.addEventListener("submit", (e) => {
@@ -229,10 +228,18 @@ cancelEditBtn.addEventListener("click", (e) => {
   esconderForms();
 });
 
-buscarInput.addEventListener("keyup", (e) => {
+buscaInput.addEventListener("keyup", (e) => {
   const busca = e.target.value;
 
   buscarTodos(busca);
+});
+
+apagarBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+
+  buscaInput.value = "";
+
+  mostrarTodos();
 });
 
 filtroSelect.addEventListener("change", (e) => {
