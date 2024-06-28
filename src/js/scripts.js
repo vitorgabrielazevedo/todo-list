@@ -77,6 +77,10 @@ const criarTodo = (id, titulo, feita) => {
   deletarBtn.innerHTML = '<i class="bi bi-trash"></i>';
   todo.appendChild(deletarBtn);
 
+  if (feita) {
+    todo.classList.add("feita");
+  }
+
   // eventos do todo
 
   todo.querySelector(".finalizar-todo").addEventListener("click", (e) => {
