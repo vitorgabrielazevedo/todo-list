@@ -16,11 +16,17 @@ let oldIdValue;
 // funções
 
 const mostrarTodos = () => {
+  limparTodos();
+
   pegarTodos().forEach((todo) => {
     const todoElement = criarTodo(todo.id, todo.titulo, todo.feita);
 
     todoList.appendChild(todoElement);
   });
+};
+
+const limparTodos = () => {
+  todoList.replaceChildren([]);
 };
 
 const addTodo = () => {
@@ -120,28 +126,30 @@ const atualizarTodo = (id, titulo) => {
   });
 
   salvarTodos(todos);
+
+  mostrarTodos();
 };
 
-const filtrarTodos = (valorFiltro) => {
-  const todos = pegarTodos();
+// const filtrarTodos = (valorFiltro) => {
+//   const todos = pegarTodos();
 
-  switch (valorFiltro) {
-    case "Todas":
-      todos.forEach((todo) => (todo.style.display = "flex"));
-      break;
+//   switch (valorFiltro) {
+//     case "Todas":
+//       todos.forEach((todo) => (todo.style.display = "flex"));
+//       break;
 
-    case "Feitas":
-      todos.forEach((todo) =>
-        todo.feita
-          ? (todo.style.display = "flex")
-          : (todo.style.display = "none")
-      );
-      break;
+//     case "Feitas":
+//       todos.forEach((todo) =>
+//         todo.feita
+//           ? (todo.style.display = "flex")
+//           : (todo.style.display = "none")
+//       );
+//       break;
 
-    default:
-      break;
-  }
-};
+//     default:
+//       break;
+//   }
+// };
 
 // local storage
 
@@ -155,7 +163,7 @@ const salvarTodos = (todos) => {
   localStorage.setItem("todos", JSON.stringify(todos));
 };
 
-const toggleConcluirTodo = (id) => {
+const toggleConcluirTodo = (id, feita) => {
   const todos = pegarTodos();
 
   const todoAlvo = todos.filter((todo) => todo.id === id)[0];
@@ -170,6 +178,16 @@ const removerTodo = (id) => {
 
   salvarTodos(todos);
 };
+
+// const atualizarTodoLocalStorage = (oldTitle, newTitle) => {
+//   const todos = pegarTodos();
+
+//   todos.map((todo) =>
+//     todo.titulo === oldTitle ? (todo.titulo = newTitle) : null
+//   );
+
+//   salvarTodos(todos);
+// };
 
 // eventos
 
