@@ -8,9 +8,9 @@ const buscaContainer = document.querySelector("#busca-container");
 const filtroContainer = document.querySelector("#filtro-container");
 const todoList = document.querySelector("#todo-list");
 const cancelEditBtn = document.querySelector("#cancel-edit-btn");
+const buscarInput = document.querySelector("#buscar-input");
 const filtroSelect = document.querySelector("#filtro-select");
 
-let oldInputValue;
 let oldIdValue;
 
 // funções
@@ -96,7 +96,6 @@ const criarTodo = (id, titulo, feita) => {
     esconderForms();
 
     editInput.value = titulo;
-    oldInputValue = titulo;
     oldIdValue = id;
   });
 
@@ -118,8 +117,6 @@ const esconderForms = () => {
   todoList.classList.toggle("hide");
 };
 
-// ANALISAR O ATUALIZAR
-
 const atualizarTodo = (id, titulo) => {
   const todos = pegarTodos();
 
@@ -132,6 +129,22 @@ const atualizarTodo = (id, titulo) => {
   salvarTodos(todos);
 
   mostrarTodos();
+};
+
+const buscarTodos = (busca) => {
+  const todos = document.querySelectorAll(".todo");
+
+  todos.forEach((todo) => {
+    let tituloTodo = todo.querySelector("h3").innerText.toLowerCase();
+
+    const buscaNormalizada = busca.toLowerCase();
+
+    todo.style.display = "flex";
+
+    if (!tituloTodo.includes(buscaNormalizada)) {
+      todo.style.display = "none";
+    }
+  });
 };
 
 // const filtrarTodos = (valorFiltro) => {
@@ -183,16 +196,6 @@ const removerTodo = (id) => {
   salvarTodos(todos);
 };
 
-// const atualizarTodoLocalStorage = (oldTitle, newTitle) => {
-//   const todos = pegarTodos();
-
-//   todos.map((todo) =>
-//     todo.titulo === oldTitle ? (todo.titulo = newTitle) : null
-//   );
-
-//   salvarTodos(todos);
-// };
-
 // eventos
 
 todoForm.addEventListener("submit", (e) => {
@@ -217,6 +220,12 @@ cancelEditBtn.addEventListener("click", (e) => {
   e.preventDefault();
 
   esconderForms();
+});
+
+buscarInput.addEventListener("keyup", (e) => {
+  const busca = e.target.value;
+
+  buscarTodos(busca);
 });
 
 filtroSelect.addEventListener("change", (e) => {
