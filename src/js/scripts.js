@@ -4,11 +4,11 @@ const todoForm = document.querySelector("#todo-form");
 const todoInput = document.querySelector("#todo-input");
 const editForm = document.querySelector("#edit-form");
 const editInput = document.querySelector("#edit-input");
-const todoList = document.querySelector("#todo-list");
 const cancelEditBtn = document.querySelector("#cancel-edit-btn");
 const buscaInput = document.querySelector("#buscar-input");
 const apagarBtn = document.querySelector("#apagar-btn");
 const filtroSelect = document.querySelector("#filtro-select");
+const todoList = document.querySelector("#todo-list");
 
 let oldIdValue;
 
@@ -172,7 +172,7 @@ const salvarTodos = (todos) => {
   localStorage.setItem("todos", JSON.stringify(todos));
 };
 
-const toggleConcluirTodo = (id, feita) => {
+const toggleConcluirTodo = (id) => {
   const todos = pegarTodos();
 
   const todoAlvo = todos.filter((todo) => todo.id === id)[0];
