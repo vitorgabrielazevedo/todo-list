@@ -14,6 +14,9 @@
 
 html {
   min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 body {
@@ -70,7 +73,6 @@ select {
 #todo-container {
   background-color: #fdfdfd;
   width: 450px;
-  margin: 3rem auto;
   padding: 1rem 2rem;
   border-radius: 15px;
 }
@@ -162,4 +164,56 @@ select {
 .todo h3 {
   flex: 1;
   font-size: 15px;
+}
+
+/* responsividade */
+
+@media (max-width: 425px) {
+  button {
+    padding: 0.3rem 0.4rem;
+  }
+
+  button i {
+    font-size: 15px;
+  }
+
+  input,
+  select {
+    padding: 0.4rem;
+  }
+
+  #todo-container {
+    width: 85%;
+  }
+
+  #todo-container h1 {
+    font-size: 30px;
+    padding: 0 0.5rem 0.5rem;
+  }
+
+  #todo-form p,
+  #edit-form p,
+  #barra-pesquisa h4 {
+    position: relative;
+    top: -7px;
+    margin-bottom: 0.3rem;
+  }
+
+  #todo-form,
+  #edit-form {
+    padding-bottom: 0.5rem;
+    font-size: 13px;
+  }
+
+  #cancel-edit-btn {
+    font-size: 14px;
+  }
+
+  #barra-pesquisa h4 {
+    font-size: 16px;
+  }
+
+  .todo h3 {
+    font-size: 12px;
+  }
 }
