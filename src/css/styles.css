@@ -195,7 +195,7 @@ select {
   #edit-form p,
   #barra-pesquisa h4 {
     position: relative;
-    top: 0px;
+    top: -7px;
     margin-bottom: 0;
   }
 
@@ -226,5 +226,13 @@ select {
 
   #todo-container {
     width: 80%;
+  }
+
+  #todo-form p,
+  #edit-form p,
+  #barra-pesquisa h4 {
+    position: relative;
+    top: -7px;
+    margin-bottom: 0.3rem;
   }
 }
