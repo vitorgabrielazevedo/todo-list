@@ -195,7 +195,7 @@ select {
   #edit-form p,
   #barra-pesquisa h4 {
     position: relative;
-    top: -7px;
+    top: 0px;
     margin-bottom: 0;
   }
 
