@@ -168,7 +168,7 @@ select {
 
 /* responsividade */
 
-@media (max-width: 530px) {
+@media (max-width: 425px) {
   button {
     padding: 0.3rem 0.4rem;
   }
@@ -215,5 +215,16 @@ select {
 
   .todo h3 {
     font-size: 12px;
+  }
+}
+
+@media (max-width: 375px) {
+  input,
+  select {
+    padding: 0.3rem;
+  }
+
+  #todo-container {
+    width: 80%;
   }
 }
